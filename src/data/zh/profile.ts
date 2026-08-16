@@ -1,19 +1,15 @@
 import type { Profile } from '../types';
 
-/** 中文占位资料：发布前请替换为经过确认的真实信息。 */
+/** 已确认的个人资料；未提供的内容仍保留示例或留空。 */
 export const profileZh: Profile = {
-  name: '你的姓名',
-  role: '数学专业本科生',
-  university: '大学名称',
-  location: '城市，中国',
-  introduction: '数学专业本科生，关注数学分析、概率论、数学建模与计算数学。',
-  about: [
-    '我是一名数学专业本科生。目前主要学习数学分析、概率论与优化，并尝试使用计算方法研究和理解数学问题。',
-    '除课程学习外，我也在逐步参与数学竞赛、数学建模与研究导向的阅读项目。本网站用于整理和记录阶段性的学术经历。',
-  ],
+  name: '唐德军',
+  role: '数学与应用数学专业本科生 · 大二',
+  university: '安徽大学',
+  introduction: '',
+  about: [],
   email: {
-    user: 'your.name',
-    domain: 'example.edu',
+    user: 'a124300084',
+    domain: 'stu.ahu.edu.cn',
   },
   socialLinks: [
     { label: 'GitHub', url: 'https://github.com/192qq-maker' },
@@ -22,13 +18,11 @@ export const profileZh: Profile = {
   canonicalUrl: 'https://192qq-maker.github.io/academic-homepage/',
   education: [
     {
-      university: '大学名称',
-      degree: '理学学士',
+      university: '安徽大学',
+      degree: '本科在读',
       major: '数学与应用数学',
-      startYear: '2024',
-      endYear: '2028（预计）',
-      location: '城市，中国',
-      coursework: ['数学分析', '高等代数', '概率论'],
+      startYear: '大二',
+      endYear: '2028年9月（预计）',
     },
   ],
   academicInterests: [

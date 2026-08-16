@@ -215,11 +215,11 @@ nav a {
 
 .hero {
   display: grid;
-  min-height: 580px;
-  padding-block: 8rem 7rem;
+  min-height: 460px;
+  padding-block: 5.5rem 4.5rem;
   grid-template-columns: minmax(0, 1fr) minmax(250px, 0.58fr);
   align-items: center;
-  gap: 5rem;
+  gap: 3rem;
   border-bottom: 1px solid var(--line);
 }
 
@@ -243,7 +243,7 @@ p {
 h1 {
   margin: 0;
   font-family: var(--serif);
-  font-size: clamp(3.6rem, 8vw, 6.8rem);
+  font-size: clamp(3.2rem, 6vw, 5.2rem);
   font-weight: 400;
   letter-spacing: -0.055em;
   line-height: 0.98;
@@ -264,16 +264,36 @@ h1 {
   line-height: 1.55;
 }
 
+:lang(zh-CN) .lede {
+  line-height: 1.65;
+}
+
+:lang(zh-CN) .prose,
+:lang(zh-CN) .contact-copy {
+  line-height: 1.8;
+}
+
+:lang(zh-CN) h1,
+:lang(zh-CN) h2,
+:lang(zh-CN) h3,
 :lang(zh-CN) .lede,
 :lang(zh-CN) .prose,
 :lang(zh-CN) .contact-copy {
-  line-height: 1.9;
+  font-family: "Songti SC", "Noto Serif CJK SC", "Source Han Serif SC", STSong, serif;
 }
 
 :lang(zh-CN) h1,
 :lang(zh-CN) h2,
 :lang(zh-CN) h3 {
   letter-spacing: -0.02em;
+}
+
+.lede:empty {
+  display: none;
+}
+
+.lede:empty + .hero-links {
+  margin-top: 1.75rem;
 }
 
 .hero-links {
@@ -312,7 +332,7 @@ h1 {
 
 .math-mark {
   width: 100%;
-  max-width: 310px;
+  max-width: 260px;
   justify-self: end;
   color: var(--accent);
   opacity: 0.72;
@@ -357,10 +377,10 @@ h1 {
 
 .content-grid {
   display: grid;
-  padding-block: 7rem 8rem;
-  grid-template-columns: 150px minmax(0, 770px);
+  padding-block: 5.5rem 6rem;
+  grid-template-columns: 150px minmax(0, 780px);
   justify-content: space-between;
-  gap: 5rem;
+  gap: 4rem;
 }
 
 aside {
@@ -395,12 +415,12 @@ aside a {
 }
 
 .sections > section + section {
-  margin-top: 8rem;
+  margin-top: 5.5rem;
 }
 
 .section-heading {
   display: flex;
-  margin-bottom: 2.6rem;
+  margin-bottom: 1.8rem;
   padding-bottom: 0.8rem;
   align-items: baseline;
   gap: 1rem;
@@ -416,7 +436,7 @@ aside a {
 h2 {
   margin: 0;
   font-family: var(--serif);
-  font-size: clamp(1.9rem, 4vw, 2.45rem);
+  font-size: clamp(1.8rem, 3vw, 2.2rem);
   font-weight: 400;
   letter-spacing: -0.025em;
   line-height: 1.2;
@@ -456,8 +476,8 @@ h3 {
 .entry {
   display: grid;
   padding: 1.8rem 0;
-  grid-template-columns: 150px minmax(0, 1fr);
-  gap: 1.5rem;
+  grid-template-columns: 130px minmax(0, 1fr);
+  gap: 1.4rem;
   border-bottom: 1px solid var(--line);
 }
 
@@ -472,6 +492,7 @@ h3 {
   font-family: var(--mono);
   font-size: 0.72rem;
   line-height: 1.6;
+  word-break: keep-all;
 }
 
 .item-subtitle {
@@ -558,8 +579,8 @@ h3 {
 
 .project {
   display: grid;
-  padding: 2.6rem 0;
-  grid-template-columns: 58px minmax(0, 1fr);
+  padding: 2.1rem 0;
+  grid-template-columns: 42px minmax(0, 1fr);
   gap: 1.3rem;
   border-bottom: 1px solid var(--line);
 }
@@ -643,7 +664,7 @@ h3 {
 
 .cv-section {
   display: flex;
-  padding: 2.6rem;
+  padding: 2rem 2.2rem;
   align-items: center;
   justify-content: space-between;
   gap: 2.5rem;
@@ -720,9 +741,9 @@ footer {
 
   .hero {
     min-height: auto;
-    padding-block: 7rem 6rem;
+    padding-block: 5rem 4.25rem;
     grid-template-columns: minmax(0, 1fr) 210px;
-    gap: 2rem;
+    gap: 2.5rem;
   }
 
   .content-grid {
@@ -788,11 +809,11 @@ footer {
 
   .hero {
     display: block;
-    padding-block: 5.5rem 4.5rem;
+    padding-block: 4rem 3.5rem;
   }
 
   h1 {
-    font-size: clamp(3.3rem, 18vw, 5rem);
+    font-size: clamp(3rem, 16vw, 4.4rem);
   }
 
   .lede {
@@ -816,15 +837,15 @@ footer {
   }
 
   .content-grid {
-    padding-block: 5rem 6rem;
+    padding-block: 4rem 5rem;
   }
 
   .sections > section + section {
-    margin-top: 5.5rem;
+    margin-top: 4.5rem;
   }
 
   .section-heading {
-    margin-bottom: 2rem;
+    margin-bottom: 1.6rem;
   }
 
   .timeline-item,

@@ -1,23 +1,17 @@
 import type { Profile } from './types';
 
 /**
- * Placeholder profile data — replace these values with your real information.
- * The page layout does not need to be edited when this file changes.
+ * Confirmed profile data. Unprovided fields remain examples or are left empty.
  */
 export const profile: Profile = {
-  name: 'Your Name',
-  role: 'Mathematics Undergraduate',
-  university: 'University Name',
-  location: 'City, Country',
-  introduction:
-    'Mathematics undergraduate interested in analysis, probability, mathematical modeling, and computational mathematics.',
-  about: [
-    'I am an undergraduate student studying mathematics. My current interests include rigorous analysis, probability, optimization, and the use of computation to investigate mathematical problems.',
-    'Alongside coursework, I am exploring mathematical competitions, modeling projects, and research-oriented reading. This website records selected academic work as it develops.',
-  ],
+  name: '唐德军',
+  role: 'Mathematics and Applied Mathematics Undergraduate · Sophomore',
+  university: 'Anhui University',
+  introduction: '',
+  about: [],
   email: {
-    user: 'your.name',
-    domain: 'example.edu',
+    user: 'a124300084',
+    domain: 'stu.ahu.edu.cn',
   },
   socialLinks: [
     { label: 'GitHub', url: 'https://github.com/192qq-maker' },
@@ -26,17 +20,11 @@ export const profile: Profile = {
   canonicalUrl: 'https://192qq-maker.github.io/academic-homepage/en/',
   education: [
     {
-      university: 'University Name',
-      degree: 'B.Sc. in Mathematics',
-      major: 'Mathematics',
-      startYear: '2024',
-      endYear: '2028 (expected)',
-      location: 'City, Country',
-      coursework: [
-        'Mathematical Analysis',
-        'Advanced Algebra',
-        'Probability Theory',
-      ],
+      university: 'Anhui University',
+      degree: 'Undergraduate',
+      major: 'Mathematics and Applied Mathematics',
+      startYear: 'Sophomore',
+      endYear: 'September 2028 (expected)',
     },
   ],
   academicInterests: [
