@@ -1,0 +1,237 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import type { Award, Experience, Profile, Project } from '../data/types';
+import { ui, type SiteLanguage } from '../i18n/ui';
+
+interface Props {
+  language: SiteLanguage;
+  profile: Profile;
+  awards: Award[];
+  experiences: Experience[];
+  projects: Project[];
+  alternateUrls: {
+    zh: string;
+    en: string;
+  };
+}
+
+const { language, profile, awards, experiences, projects, alternateUrls } = Astro.props;
+const t = ui[language];
+const base = import.meta.env.BASE_URL;
+const withBase = (path: string) =>
+  /^(https?:|mailto:|#)/.test(path) ? path : `${base}${path.replace(/^\//, '')}`;
+
+const navItems = [
+  [t.nav.about, 'about'],
+  [t.nav.education, 'education'],
+  [t.nav.awards, 'awards'],
+  [t.nav.experience, 'experience'],
+  [t.nav.projects, 'projects'],
+  [t.nav.cv, 'cv'],
+];
+
+const projectLinks = (project: Project) => [
+  { label: t.github, url: project.githubUrl && withBase(project.githubUrl) },
+  { label: t.liveDemo, url: project.demoUrl && withBase(project.demoUrl) },
+  { label: t.report, url: project.reportUrl && withBase(project.reportUrl) },
+].filter((link): link is { label: string; url: string } => Boolean(link.url));
+
+const switchUrl = language === 'zh' ? withBase('en/') : withBase('');
+const switchLabel = language === 'zh' ? 'EN' : '中';
+---
+
+<BaseLayout
+  title={`${profile.name} — ${profile.role}`}
+  description={profile.introduction}
+  canonicalUrl={profile.canonicalUrl}
+  lang={t.htmlLang}
+  alternateUrls={alternateUrls}
+  skipText={t.skipText}
+>
+  <header class="site-header">
+    <div class="shell header-inner">
+      <a class="wordmark" href="#top" aria-label={`${profile.name}, ${t.home}`}>
+        <span aria-hidden="true">{profile.name.charAt(0) || 'Y'}</span>
+        <span>{profile.name}</span>
+      </a>
+      <nav aria-label={t.primaryNavigation}>
+        <ul>
+          {navItems.map(([label, id]) => <li><a href={`#${id}`}>{label}</a></li>)}
+        </ul>
+      </nav>
+      <a class="language-switch" href={switchUrl} lang={language === 'zh' ? 'en' : 'zh-CN'} aria-label={t.switchLanguage}>
+        {switchLabel}
+      </a>
+      <button
+        class="theme-toggle"
+        type="button"
+        data-theme-toggle
+        data-light-label={t.lightTheme}
+        data-dark-label={t.darkTheme}
+        aria-label={t.switchTheme}
+      >
+        <svg class="sun" aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.5"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.65 17.65l1.42 1.42M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.65 6.35l1.42-1.42"></path></svg>
+        <svg class="moon" aria-hidden="true" viewBox="0 0 24 24"><path d="M20 15.1A8.5 8.5 0 0 1 8.9 4a8.5 8.5 0 1 0 11.1 11.1Z"></path></svg>
+      </button>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <section class="hero shell" id="top" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="eyebrow">{profile.role}</p>
+        <h1 id="hero-title">{profile.name}</h1>
+        <p class="affiliation">{profile.university}{profile.location && <span> · {profile.location}</span>}</p>
+        <p class="lede">{profile.introduction}</p>
+        <div class="hero-links" aria-label={t.contactLinks}>
+          <a data-email data-user={profile.email.user} data-domain={profile.email.domain} href="#contact">
+            {profile.email.user} [at] {profile.email.domain.replace(/\./g, ' [dot] ')}
+          </a>
+          {profile.socialLinks.map((link) => <a href={link.url} rel="me noreferrer">{link.label}</a>)}
+          <a class="button" href={withBase(profile.cvUrl)} download>{t.downloadCv} <span aria-hidden="true">↓</span></a>
+        </div>
+      </div>
+      <div class="math-mark" aria-hidden="true">
+        <svg viewBox="0 0 300 240" role="presentation">
+          <path class="axis" d="M26 200H277M51 220V23"></path>
+          <path class="curve" d="M52 185C89 177 104 143 125 120s48-35 72-31 43 25 72 67"></path>
+          <circle cx="125" cy="120" r="4"></circle>
+          <path class="guide" d="M125 120V200M51 120H125"></path>
+          <text x="92" y="109">f(x)</text>
+        </svg>
+      </div>
+    </section>
+
+    <div class="shell content-grid">
+      <aside aria-label={t.onThisPage}>
+        <p>{t.onThisPage}</p>
+        <ul>
+          {navItems.slice(0, 5).map(([label, id]) => <li><a href={`#${id}`}>{label}</a></li>)}
+          <li><a href="#coursework">{t.nav.coursework}</a></li>
+          <li><a href="#contact">{t.nav.contact}</a></li>
+        </ul>
+      </aside>
+
+      <div class="sections">
+        <section id="about" aria-labelledby="about-title">
+          <div class="section-heading"><span>01</span><h2 id="about-title">{t.nav.about}</h2></div>
+          <div class="prose">{profile.about.map((paragraph) => <p>{paragraph}</p>)}</div>
+        </section>
+
+        <section id="education" aria-labelledby="education-title">
+          <div class="section-heading"><span>02</span><h2 id="education-title">{t.nav.education}</h2></div>
+          <div class="timeline">
+            {profile.education.map((item) => (
+              <article class="timeline-item">
+                <div class="timeline-date">{item.startYear} — {item.endYear}</div>
+                <div>
+                  <h3>{item.university}</h3>
+                  <p class="item-subtitle">{item.degree} · {item.major}</p>
+                  {item.location && <p class="meta">{item.location}</p>}
+                  {(item.gpa || item.ranking) && <p class="meta">{[item.gpa && `GPA: ${item.gpa}`, item.ranking && `${t.rank}: ${item.ranking}`].filter(Boolean).join(' · ')}</p>}
+                  {item.coursework && <p class="detail"><strong>{t.selectedCourseworkLabel}</strong> {item.coursework.join(language === 'zh' ? '、' : ', ')}</p>}
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section id="interests" aria-labelledby="interests-title">
+          <div class="section-heading"><span>03</span><h2 id="interests-title">{t.interests}</h2></div>
+          <ul class="interest-list">{profile.academicInterests.map((interest) => <li>{interest}</li>)}</ul>
+        </section>
+
+        <section id="awards" aria-labelledby="awards-title">
+          <div class="section-heading"><span>04</span><h2 id="awards-title">{t.awardsTitle}</h2></div>
+          <div class="entries">
+            {awards.map((award) => (
+              <article class="entry">
+                <time>{award.date}</time>
+                <div>
+                  <h3>{award.url ? <a href={award.url}>{award.name}</a> : award.name}</h3>
+                  <p class="item-subtitle">{award.competition}{award.level && ` · ${award.level}`}</p>
+                  {award.description && <p>{award.description}</p>}
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section id="experience" aria-labelledby="experience-title">
+          <div class="section-heading"><span>05</span><h2 id="experience-title">{t.experienceTitle}</h2></div>
+          <div class="entries">
+            {experiences.map((experience) => (
+              <article class="entry">
+                <time>{experience.date}</time>
+                <div>
+                  <h3>{experience.url ? <a href={experience.url}>{experience.title}</a> : experience.title}</h3>
+                  {(experience.organization || experience.advisor) && (
+                    <p class="item-subtitle">{[experience.organization, experience.advisor && `${t.advisor}: ${experience.advisor}`].filter(Boolean).join(' · ')}</p>
+                  )}
+                  <p>{experience.description}</p>
+                  {experience.topics && <p class="topics"><span>{t.topics}</span> {experience.topics.join(' · ')}</p>}
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section id="projects" aria-labelledby="projects-title">
+          <div class="section-heading"><span>06</span><h2 id="projects-title">{t.projectsTitle}</h2></div>
+          <div class="projects">
+            {projects.map((project, index) => (
+              <article class="project">
+                <div class="project-number" aria-hidden="true">{String(index + 1).padStart(2, '0')}</div>
+                <div class="project-body">
+                  <div class="project-kicker"><span>{project.kind}</span><time>{project.date}</time></div>
+                  <h3>{project.name}</h3>
+                  {project.image && <img src={withBase(project.image.src)} alt={project.image.alt} loading="lazy" />}
+                  <p>{project.description}</p>
+                  {project.role && <p class="detail"><strong>{t.role}{language === 'zh' ? '：' : ':'}</strong> {project.role}</p>}
+                  {project.topics && <p class="topics"><span>{t.methods}</span> {project.topics.join(' · ')}</p>}
+                  {projectLinks(project).length > 0 && (
+                    <div class="project-links">
+                      {projectLinks(project).map((link) => <a href={link.url}>{link.label} <span aria-hidden="true">↗</span></a>)}
+                    </div>
+                  )}
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section id="coursework" aria-labelledby="coursework-title">
+          <div class="section-heading"><span>07</span><h2 id="coursework-title">{t.selectedCoursework}</h2></div>
+          <ul class="course-list">{profile.coursework.map((course) => <li>{course}</li>)}</ul>
+        </section>
+
+        <section id="cv" class="cv-section" aria-labelledby="cv-title">
+          <div>
+            <p class="eyebrow">{t.cvEyebrow}</p>
+            <h2 id="cv-title">{t.cvTitle}</h2>
+            <p>{t.cvDescription}</p>
+          </div>
+          <a class="button button-light" href={withBase(profile.cvUrl)} download>{t.downloadCv} <span aria-hidden="true">↓</span></a>
+        </section>
+
+        <section id="contact" aria-labelledby="contact-title">
+          <div class="section-heading"><span>08</span><h2 id="contact-title">{t.nav.contact}</h2></div>
+          <p class="contact-copy">{t.contactDescription}</p>
+          <div class="contact-links">
+            <a data-email data-user={profile.email.user} data-domain={profile.email.domain} href="#contact">
+              {profile.email.user} [at] {profile.email.domain.replace(/\./g, ' [dot] ')}
+            </a>
+            {profile.socialLinks.map((link) => <a href={link.url} rel="me noreferrer">{link.label} <span aria-hidden="true">↗</span></a>)}
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="shell footer-inner">
+      <p>© {new Date().getFullYear()} {profile.name}</p>
+      <p>{t.footer}</p>
+    </div>
+  </footer>
+</BaseLayout>

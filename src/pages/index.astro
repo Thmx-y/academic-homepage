@@ -1,0 +1,22 @@
+---
+import HomePage from '../components/HomePage.astro';
+import { profileZh } from '../data/zh/profile';
+import { awardsZh } from '../data/zh/awards';
+import { experiencesZh } from '../data/zh/experience';
+import { projectsZh } from '../data/zh/projects';
+import { profile as profileEn } from '../data/profile';
+
+const alternateUrls = {
+  zh: profileZh.canonicalUrl,
+  en: profileEn.canonicalUrl,
+};
+---
+
+<HomePage
+  language="zh"
+  profile={profileZh}
+  awards={awardsZh}
+  experiences={experiencesZh}
+  projects={projectsZh}
+  alternateUrls={alternateUrls}
+/>

@@ -1,0 +1,82 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+  canonicalUrl: string;
+  lang: 'zh-CN' | 'en';
+  alternateUrls: {
+    zh: string;
+    en: string;
+  };
+  skipText: string;
+}
+
+const { title, description, canonicalUrl, lang, alternateUrls, skipText } = Astro.props;
+const base = import.meta.env.BASE_URL;
+const asset = (path: string) => `${base}${path.replace(/^\//, '')}`;
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#f7f7f4" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#171a18" media="(prefers-color-scheme: dark)" />
+    <link rel="icon" type="image/svg+xml" href={asset('favicon.svg')} />
+    <link rel="canonical" href={canonicalUrl} />
+    <link rel="alternate" hreflang="zh-CN" href={alternateUrls.zh} />
+    <link rel="alternate" hreflang="en" href={alternateUrls.en} />
+    <link rel="alternate" hreflang="x-default" href={alternateUrls.zh} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={new URL(asset('og-image.svg'), Astro.site)} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <title>{title}</title>
+    <script is:inline>
+      (() => {
+        let saved = null;
+        try { saved = localStorage.getItem('color-theme'); } catch {}
+        const dark = saved === 'dark' || (!saved && matchMedia('(prefers-color-scheme: dark)').matches);
+        document.documentElement.dataset.theme = dark ? 'dark' : 'light';
+      })();
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">{skipText}</a>
+    <slot />
+    <script is:inline>
+      const button = document.querySelector('[data-theme-toggle]');
+      const syncThemeButton = () => {
+        const dark = document.documentElement.dataset.theme === 'dark';
+        const label = dark ? button?.getAttribute('data-light-label') : button?.getAttribute('data-dark-label');
+        if (label) {
+          button?.setAttribute('aria-label', label);
+          button?.setAttribute('title', label);
+        }
+      };
+      button?.addEventListener('click', () => {
+        const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+        document.documentElement.dataset.theme = next;
+        try { localStorage.setItem('color-theme', next); } catch {}
+        syncThemeButton();
+      });
+      syncThemeButton();
+
+      document.querySelectorAll('[data-email]').forEach((element) => {
+        const user = element.getAttribute('data-user');
+        const domain = element.getAttribute('data-domain');
+        if (user && domain) {
+          const address = `${user}@${domain}`;
+          element.textContent = address;
+          element.setAttribute('href', `mailto:${address}`);
+        }
+      });
+    </script>
+  </body>
+</html>
