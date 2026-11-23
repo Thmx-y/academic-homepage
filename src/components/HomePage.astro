@@ -47,6 +47,7 @@ const navItems = [
   { label: t.nav.cv, id: 'cv', visible: Boolean(profile.cvUrl) || showPlaceholders },
   { label: t.nav.contact, id: 'contact', visible: true },
 ].filter((item) => item.visible);
+const headerNavItems = navItems.filter((item) => ['education', 'awards', 'experience', 'projects', 'coursework', 'contact'].includes(item.id));
 const sectionNumber = (id: string) => String(navItems.filter((item) => item.id !== 'cv').findIndex((item) => item.id === id) + 1).padStart(2, '0');
 
 const projectLinks = (project: Project) => [
@@ -75,7 +76,7 @@ const switchLabel = language === 'zh' ? 'EN' : '中';
       </a>
       <nav aria-label={t.primaryNavigation}>
         <ul>
-          {navItems.map(({ label, id }) => <li><a href={`#${id}`}>{label}</a></li>)}
+          {headerNavItems.map(({ label, id }) => <li><a href={`#${id}`}>{label}</a></li>)}
         </ul>
       </nav>
       <a class="language-switch" href={switchUrl} lang={language === 'zh' ? 'en' : 'zh-CN'} aria-label={t.switchLanguage}>
@@ -98,8 +99,8 @@ const switchLabel = language === 'zh' ? 'EN' : '中';
   <main id="main-content">
     <section class="hero shell" id="top" aria-labelledby="hero-title">
       <div class="hero-copy">
-        <p class="eyebrow">{profile.role}</p>
         <h1 id="hero-title">{profile.name}</h1>
+        <p class="eyebrow hero-role">{profile.role}</p>
         <p class="affiliation">{profile.university}{profile.location && <span> · {profile.location}</span>}</p>
         <p class="lede">{profile.introduction}</p>
         <div class="hero-links" aria-label={t.contactLinks}>
@@ -130,7 +131,7 @@ const switchLabel = language === 'zh' ? 'EN' : '中';
       </aside>
 
       <div class="sections">
-        {(hasAbout || showPlaceholders) && <section id="about" aria-labelledby="about-title">
+        {(hasAbout || showPlaceholders) && <section id="about" class:list={{ 'section-pending': !hasAbout }} aria-labelledby="about-title">
           <div class="section-heading"><span>{sectionNumber('about')}</span><h2 id="about-title">{t.nav.about}</h2></div>
           <div class="prose">{hasAbout ? profile.about.map((paragraph) => <p>{paragraph}</p>) : <p class="placeholder-note">{t.aboutPending}</p>}</div>
         </section>}
@@ -153,7 +154,7 @@ const switchLabel = language === 'zh' ? 'EN' : '中';
           </div>
         </section>}
 
-        {(hasInterests || showPlaceholders) && <section id="interests" aria-labelledby="interests-title">
+        {(hasInterests || showPlaceholders) && <section id="interests" class:list={{ 'section-pending': !hasInterests }} aria-labelledby="interests-title">
           <div class="section-heading"><span>{sectionNumber('interests')}</span><h2 id="interests-title">{t.interests}</h2></div>
           {hasInterests ? <ul class="interest-list">{profile.academicInterests.map((interest) => <li>{interest}</li>)}</ul> : <p class="placeholder-note">{t.interestsPending}</p>}
         </section>}
@@ -193,7 +194,7 @@ const switchLabel = language === 'zh' ? 'EN' : '中';
           </div>
         </section>}
 
-        {(visibleProjects.length > 0 || showPlaceholders) && <section id="projects" aria-labelledby="projects-title">
+        {(visibleProjects.length > 0 || showPlaceholders) && <section id="projects" class:list={{ 'section-pending': visibleProjects.length === 0 }} aria-labelledby="projects-title">
           <div class="section-heading"><span>{sectionNumber('projects')}</span><h2 id="projects-title">{t.projectsTitle}</h2></div>
           {visibleProjects.length === 0 && <p class="placeholder-note">{t.projectsPending}</p>}
           {visibleProjects.length > 0 && <div class="projects">
@@ -230,7 +231,7 @@ const switchLabel = language === 'zh' ? 'EN' : '中';
           </div>}
         </section>}
 
-        {resourceGroups.length > 0 && <section id="resources" aria-labelledby="resources-title">
+        {resourceGroups.length > 0 && <section id="resources" class:list={{ 'resources-pending': visibleResources.length === 0 }} aria-labelledby="resources-title">
           <div class="section-heading"><span>{sectionNumber('resources')}</span><h2 id="resources-title">{t.nav.resources}</h2></div>
           <p class="resource-intro">{t.resourcesDescription}</p>
           {resourceGroups.map(({ category, items }) => (
@@ -257,7 +258,7 @@ const switchLabel = language === 'zh' ? 'EN' : '中';
           ))}
         </section>}
 
-        {(profile.cvUrl || showPlaceholders) && <section id="cv" class="cv-section" aria-labelledby="cv-title">
+        {(profile.cvUrl || showPlaceholders) && <section id="cv" class:list={['cv-section', { 'cv-section-pending': !profile.cvUrl }]} aria-labelledby="cv-title">
           <div>
             <p class="eyebrow">{t.cvEyebrow}</p>
             <h2 id="cv-title">{profile.cvUrl ? t.cvTitle : t.cvPendingTitle}</h2>
