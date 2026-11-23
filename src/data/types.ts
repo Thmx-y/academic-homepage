@@ -95,7 +95,7 @@ export interface StudyResource {
   subject?: { zh: string; en: string };
   year?: string;
   format?: string;
-  /** Local paths are relative to public/, e.g. resources/notes/analysis.pdf. */
+  /** 支持外部资料链接；站内文件路径相对于 public/。 */
   url?: string;
   hidden?: boolean;
 }

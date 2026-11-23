@@ -14,4 +14,4 @@
 - `public/`：网站静态文件。
 - `.github/workflows/`：自动构建与部署配置。
 
-专业课资料使用独立仓库管理，不在本仓库发布。
+专业课资料保存在[独立资料仓库](https://github.com/Thmx-y/ahu-math-resources)，主页仅展示仓库和分类目录链接，不复制资料文件。链接统一在 `src/data/resources.ts` 中维护。

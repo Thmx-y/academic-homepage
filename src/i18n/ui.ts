@@ -51,6 +51,7 @@ export interface UiText {
   cvPendingTitle: string;
   cvPendingDescription: string;
   resourcesDescription: string;
+  resourceRepository: string;
   resourcesCategories: {
     'past-exams': string;
     notes: string;
@@ -60,7 +61,6 @@ export interface UiText {
   resourcePending: string;
   viewResource: string;
   downloadResource: string;
-  openResourceLink: string;
 }
 
 export const ui: Record<SiteLanguage, UiText> = {
@@ -114,17 +114,17 @@ export const ui: Record<SiteLanguage, UiText> = {
     projectsPending: '项目资料待补充。',
     cvPendingTitle: '简历待补充',
     cvPendingDescription: '暂未提供简历 PDF。',
-    resourcesDescription: '专业课往年真题、个人笔记与学习资料。',
+    resourcesDescription: '资料保存在独立仓库，可按分类浏览和下载。',
+    resourceRepository: '查看完整资料仓库',
     resourcesCategories: {
       'past-exams': '专业课往年真题',
-      notes: '个人笔记与整理',
-      other: '其他资料',
+      notes: '笔记与讲义',
+      other: '教材与参考资料',
     },
     resourcesEmpty: '资料待上传。',
     resourcePending: '待上传',
     viewResource: '查看',
     downloadResource: '下载',
-    openResourceLink: '打开链接',
   },
   en: {
     htmlLang: 'en',
@@ -176,16 +176,16 @@ export const ui: Record<SiteLanguage, UiText> = {
     projectsPending: 'Project details to be added.',
     cvPendingTitle: 'CV to be added',
     cvPendingDescription: 'A CV PDF is not yet available.',
-    resourcesDescription: 'Past examination papers, personal notes, and study materials.',
+    resourcesDescription: 'Browse and download materials from a separate repository.',
+    resourceRepository: 'View the full repository',
     resourcesCategories: {
       'past-exams': 'Past Examination Papers',
-      notes: 'Personal Notes',
-      other: 'Other Materials',
+      notes: 'Notes & Handouts',
+      other: 'Textbooks & References',
     },
     resourcesEmpty: 'Materials to be uploaded.',
     resourcePending: 'Upload pending',
     viewResource: 'View',
     downloadResource: 'Download',
-    openResourceLink: 'Open link',
   },
 };

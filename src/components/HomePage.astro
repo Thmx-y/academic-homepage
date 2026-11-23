@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import type { Award, Experience, Profile, Project, ResourceCategory } from '../data/types';
-import { resources } from '../data/resources';
+import { resources, resourceRepositoryUrl } from '../data/resources';
 import { ui, type SiteLanguage } from '../i18n/ui';
 
 interface Props {
@@ -231,9 +231,9 @@ const switchLabel = language === 'zh' ? 'EN' : '中';
           </div>}
         </section>}
 
-        {resourceGroups.length > 0 && <section id="resources" class:list={{ 'resources-pending': visibleResources.length === 0 }} aria-labelledby="resources-title">
+        {resourceGroups.length > 0 && <section id="resources" class:list={{ 'resources-compact': visibleResources.every((item) => /^https?:/i.test(item.url ?? '')) }} aria-labelledby="resources-title">
           <div class="section-heading"><span>{sectionNumber('resources')}</span><h2 id="resources-title">{t.nav.resources}</h2></div>
-          <p class="resource-intro">{t.resourcesDescription}</p>
+          <p class="resource-intro">{t.resourcesDescription} <a href={resourceRepositoryUrl}>{t.resourceRepository}</a></p>
           {resourceGroups.map(({ category, items }) => (
             <div class="resource-group">
               <h3>{t.resourcesCategories[category]}</h3>
@@ -241,15 +241,15 @@ const switchLabel = language === 'zh' ? 'EN' : '中';
                 <ul class="resource-list">
                   {items.map((resource) => (
                     <li>
-                      <h4>{resource.title[language]}</h4>
+                      <h4>{resource.url ? <a href={withBase(resource.url)}>{resource.title[language]}</a> : resource.title[language]}</h4>
                       {(resource.subject || resource.year || resource.format) && <p class="meta">{[resource.subject?.[language], resource.year, resource.format].filter(Boolean).join(' · ')}</p>}
                       {resource.description && <p class="resource-description">{resource.description[language]}</p>}
-                      {resource.url ? (
+                      {resource.url ? (!/^https?:/i.test(resource.url) && (
                         <div class="project-links">
-                          <a href={withBase(resource.url)}>{/^https?:/i.test(resource.url) ? t.openResourceLink : t.viewResource}</a>
-                          {!/^https?:/i.test(resource.url) && <a href={withBase(resource.url)} download>{t.downloadResource}</a>}
+                          <a href={withBase(resource.url)}>{t.viewResource}</a>
+                          <a href={withBase(resource.url)} download>{t.downloadResource}</a>
                         </div>
-                      ) : <p class="meta">{t.resourcePending}</p>}
+                      )) : <p class="meta">{t.resourcePending}</p>}
                     </li>
                   ))}
                 </ul>
