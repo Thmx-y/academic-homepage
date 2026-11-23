@@ -14,6 +14,7 @@ export interface UiText {
     projects: string;
     cv: string;
     coursework: string;
+    resources: string;
     contact: string;
   };
   interests: string;
@@ -49,6 +50,17 @@ export interface UiText {
   projectsPending: string;
   cvPendingTitle: string;
   cvPendingDescription: string;
+  resourcesDescription: string;
+  resourcesCategories: {
+    'past-exams': string;
+    notes: string;
+    other: string;
+  };
+  resourcesEmpty: string;
+  resourcePending: string;
+  viewResource: string;
+  downloadResource: string;
+  openResourceLink: string;
 }
 
 export const ui: Record<SiteLanguage, UiText> = {
@@ -66,6 +78,7 @@ export const ui: Record<SiteLanguage, UiText> = {
       projects: '项目',
       cv: '简历',
       coursework: '课程',
+      resources: '学习资料',
       contact: '联系我',
     },
     interests: '学术兴趣',
@@ -101,6 +114,17 @@ export const ui: Record<SiteLanguage, UiText> = {
     projectsPending: '项目资料待补充。',
     cvPendingTitle: '简历待补充',
     cvPendingDescription: '暂未提供简历 PDF。',
+    resourcesDescription: '专业课往年真题、个人笔记与学习资料。',
+    resourcesCategories: {
+      'past-exams': '专业课往年真题',
+      notes: '个人笔记与整理',
+      other: '其他资料',
+    },
+    resourcesEmpty: '资料待上传。',
+    resourcePending: '待上传',
+    viewResource: '查看',
+    downloadResource: '下载',
+    openResourceLink: '打开链接',
   },
   en: {
     htmlLang: 'en',
@@ -116,6 +140,7 @@ export const ui: Record<SiteLanguage, UiText> = {
       projects: 'Projects',
       cv: 'CV',
       coursework: 'Coursework',
+      resources: 'Resources',
       contact: 'Contact',
     },
     interests: 'Academic Interests',
@@ -151,5 +176,16 @@ export const ui: Record<SiteLanguage, UiText> = {
     projectsPending: 'Project details to be added.',
     cvPendingTitle: 'CV to be added',
     cvPendingDescription: 'A CV PDF is not yet available.',
+    resourcesDescription: 'Past examination papers, personal notes, and study materials.',
+    resourcesCategories: {
+      'past-exams': 'Past Examination Papers',
+      notes: 'Personal Notes',
+      other: 'Other Materials',
+    },
+    resourcesEmpty: 'Materials to be uploaded.',
+    resourcePending: 'Upload pending',
+    viewResource: 'View',
+    downloadResource: 'Download',
+    openResourceLink: 'Open link',
   },
 };

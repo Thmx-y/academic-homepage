@@ -85,3 +85,17 @@ export interface Project {
     alt: string;
   };
 }
+
+export type ResourceCategory = 'past-exams' | 'notes' | 'other';
+
+export interface StudyResource {
+  title: { zh: string; en: string };
+  category: ResourceCategory;
+  description?: { zh: string; en: string };
+  subject?: { zh: string; en: string };
+  year?: string;
+  format?: string;
+  /** Local paths are relative to public/, e.g. resources/notes/analysis.pdf. */
+  url?: string;
+  hidden?: boolean;
+}

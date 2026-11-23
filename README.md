@@ -24,7 +24,7 @@ npm run preview  # Preview the production build locally
 
 ## Where to edit content
 
-Each language has four parallel content files. Update both columns when both versions should show the same real experience:
+Each language has parallel content files. Update both columns when both versions should show the same real experience. Study resources share one bilingual data file:
 
 | Content | Chinese (default) | English |
 | --- | --- | --- |
@@ -32,6 +32,7 @@ Each language has four parallel content files. Update both columns when both ver
 | Awards and competitions | `src/data/zh/awards.ts` | `src/data/awards.ts` |
 | Research, seminars, and experience | `src/data/zh/experience.ts` | `src/data/experience.ts` |
 | Projects | `src/data/zh/projects.ts` | `src/data/projects.ts` |
+| Study materials and download links | `src/data/resources.ts` (shared bilingual records) | Same file |
 
 Shared interfaces are in `src/data/types.ts`. Optional properties may be omitted; the page hides the corresponding row or link automatically.
 
@@ -176,6 +177,36 @@ socialLinks: [
 ```
 
 The email is stored in two parts and assembled in the browser. This deters basic scraping only. With JavaScript disabled, a readable `[at]` / `[dot]` version remains.
+
+### Add study resources
+
+The “学习资料 / Resources” section has three categories: past exam papers, personal notes, and other materials. Empty categories show “待上传 / Materials to be uploaded” while `showPlaceholders` is enabled.
+
+1. Place the file in one of these folders:
+   - Past exam papers: `public/resources/past-exams/`
+   - Personal notes: `public/resources/notes/`
+   - Other materials: `public/resources/other/`
+2. Add one record to `src/data/resources.ts`. Both languages share the same file URL.
+
+Example only — replace the title, year, and file with the material you actually upload:
+
+```ts
+{
+  title: { zh: '数学分析往年试卷', en: 'Past Paper: Mathematical Analysis' },
+  category: 'past-exams', // 'past-exams', 'notes', or 'other'
+  subject: { zh: '数学分析', en: 'Mathematical Analysis' }, // optional
+  year: '2024', // optional: use the year printed on the material
+  format: 'PDF', // optional: PDF, ZIP, etc.
+  description: { zh: '试卷说明。', en: 'Description of the paper.' }, // optional
+  url: 'resources/past-exams/analysis-2024.pdf',
+},
+```
+
+For personal notes, set `category: 'notes'` and use a path such as `resources/notes/analysis-notes.pdf`. For files stored elsewhere, `url` may be a full `https://...` link. External URLs show an “Open link” action; local files have “View” and “Download” actions. Do not include `public/` in the URL. GitHub Pages repository subpaths are added automatically.
+
+If a file is not ready, omit `url` and the entry will show “待上传 / Upload pending” without a link. Use `hidden: true` to keep an individual record unpublished. No example download files or fake links are included in the initial version.
+
+This is a static, public resource area. Files become available after they are committed, pushed, and deployed; there is no browser upload form or login. Keep large collections on an external file host and add links here.
 
 ### Add a portrait
 

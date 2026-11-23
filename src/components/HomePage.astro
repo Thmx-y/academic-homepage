@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import type { Award, Experience, Profile, Project } from '../data/types';
+import type { Award, Experience, Profile, Project, ResourceCategory } from '../data/types';
+import { resources } from '../data/resources';
 import { ui, type SiteLanguage } from '../i18n/ui';
 
 interface Props {
@@ -23,6 +24,12 @@ const visibleProjects = projects.filter((item) => !item.hidden);
 const hasAbout = profile.about.some((paragraph) => paragraph.trim());
 const hasInterests = profile.academicInterests.length > 0;
 const hasCoursework = profile.coursework.length > 0 || Boolean(profile.currentCoursework?.length);
+const visibleResources = resources.filter((item) => !item.hidden);
+const resourceCategories: ResourceCategory[] = ['past-exams', 'notes', 'other'];
+const resourceGroups = resourceCategories.map((category) => ({
+  category,
+  items: visibleResources.filter((item) => item.category === category),
+})).filter((group) => group.items.length > 0 || showPlaceholders);
 const t = ui[language];
 const base = import.meta.env.BASE_URL;
 const withBase = (path: string) =>
@@ -36,6 +43,7 @@ const navItems = [
   { label: t.nav.experience, id: 'experience', visible: visibleExperiences.length > 0 },
   { label: t.nav.projects, id: 'projects', visible: visibleProjects.length > 0 || showPlaceholders },
   { label: t.nav.coursework, id: 'coursework', visible: hasCoursework },
+  { label: t.nav.resources, id: 'resources', visible: resourceGroups.length > 0 },
   { label: t.nav.cv, id: 'cv', visible: Boolean(profile.cvUrl) || showPlaceholders },
   { label: t.nav.contact, id: 'contact', visible: true },
 ].filter((item) => item.visible);
@@ -220,6 +228,33 @@ const switchLabel = language === 'zh' ? 'EN' : '中';
             <h3>{t.currentCoursework}</h3>
             <ul class="course-list">{profile.currentCoursework?.map((course) => <li>{course}</li>)}</ul>
           </div>}
+        </section>}
+
+        {resourceGroups.length > 0 && <section id="resources" aria-labelledby="resources-title">
+          <div class="section-heading"><span>{sectionNumber('resources')}</span><h2 id="resources-title">{t.nav.resources}</h2></div>
+          <p class="resource-intro">{t.resourcesDescription}</p>
+          {resourceGroups.map(({ category, items }) => (
+            <div class="resource-group">
+              <h3>{t.resourcesCategories[category]}</h3>
+              {items.length === 0 ? <p class="placeholder-note">{t.resourcesEmpty}</p> : (
+                <ul class="resource-list">
+                  {items.map((resource) => (
+                    <li>
+                      <h4>{resource.title[language]}</h4>
+                      {(resource.subject || resource.year || resource.format) && <p class="meta">{[resource.subject?.[language], resource.year, resource.format].filter(Boolean).join(' · ')}</p>}
+                      {resource.description && <p class="resource-description">{resource.description[language]}</p>}
+                      {resource.url ? (
+                        <div class="project-links">
+                          <a href={withBase(resource.url)}>{/^https?:/i.test(resource.url) ? t.openResourceLink : t.viewResource}</a>
+                          {!/^https?:/i.test(resource.url) && <a href={withBase(resource.url)} download>{t.downloadResource}</a>}
+                        </div>
+                      ) : <p class="meta">{t.resourcePending}</p>}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          ))}
         </section>}
 
         {(profile.cvUrl || showPlaceholders) && <section id="cv" class="cv-section" aria-labelledby="cv-title">
