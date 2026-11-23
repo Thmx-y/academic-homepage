@@ -9,10 +9,22 @@ export const awards: Award[] = [
     date: '2026',
   },
   {
+    name: 'National Encouragement Scholarship',
+    competition: 'Scholarship',
+    level: 'National',
+    date: '2025–2026 academic year',
+  },
+  {
     name: 'Provincial Third Prize',
     competition: '17th Chinese Mathematics Competitions (CMC), Mathematics Category A',
     level: 'Provincial',
     date: '2025',
+  },
+  {
+    name: 'National Encouragement Scholarship',
+    competition: 'Scholarship',
+    level: 'National',
+    date: '2024–2025 academic year',
   },
   {
     name: 'Award Result Placeholder',

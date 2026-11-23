@@ -9,10 +9,22 @@ export const awardsZh: Award[] = [
     date: '2026',
   },
   {
+    name: '国家励志奖学金',
+    competition: '奖学金',
+    level: '国家级',
+    date: '2025—2026 学年',
+  },
+  {
     name: '省级三等奖',
     competition: '第十七届全国大学生数学竞赛（数学 A 类）',
     level: '省级',
     date: '2025',
+  },
+  {
+    name: '国家励志奖学金',
+    competition: '奖学金',
+    level: '国家级',
+    date: '2024—2025 学年',
   },
   {
     name: '获奖结果占位',
