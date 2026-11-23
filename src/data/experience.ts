@@ -4,6 +4,7 @@ import type { Experience } from './types';
 export const experiences: Experience[] = [
   {
     title: 'Reading Project Placeholder',
+    hidden: true,
     organization: 'Department of Mathematics, University Name',
     date: 'Spring 2026',
     description:
@@ -12,6 +13,7 @@ export const experiences: Experience[] = [
   },
   {
     title: 'Mathematical Modeling Experience Placeholder',
+    hidden: true,
     date: 'Autumn 2025',
     description:
       'Developed and evaluated a mathematical model for a sample problem, with attention to assumptions, sensitivity, and interpretation.',

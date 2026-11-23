@@ -138,10 +138,13 @@ a {
 
 nav {
   margin-left: auto;
+  min-width: 0;
+  overflow-x: auto;
 }
 
 nav ul {
   display: flex;
+  width: max-content;
   margin: 0;
   padding: 0;
   gap: 1.55rem;
@@ -651,6 +654,15 @@ h3 {
   list-style: none;
 }
 
+.course-group + .course-group {
+  margin-top: 2rem;
+}
+
+.course-group h3 {
+  margin-bottom: 0.8rem;
+  font-size: 1.1rem;
+}
+
 .course-list li {
   padding: 0.85rem 0;
   border-bottom: 1px solid var(--line);
@@ -734,11 +746,6 @@ footer {
     gap: 1rem;
   }
 
-  nav li:nth-child(2),
-  nav li:nth-child(3) {
-    display: none;
-  }
-
   .hero {
     min-height: auto;
     padding-block: 5rem 4.25rem;
@@ -766,10 +773,12 @@ footer {
 
   .header-inner {
     min-height: 62px;
+    gap: 0.75rem;
   }
 
   .wordmark {
     min-width: 0;
+    flex-shrink: 0;
   }
 
   .wordmark span:last-child {
@@ -779,6 +788,7 @@ footer {
   nav {
     overflow-x: auto;
     margin-left: 0;
+    flex: 1;
     scrollbar-width: none;
   }
 
@@ -788,11 +798,6 @@ footer {
 
   nav ul {
     width: max-content;
-  }
-
-  nav li:nth-child(4),
-  nav li:nth-child(6) {
-    display: none;
   }
 
   nav a {

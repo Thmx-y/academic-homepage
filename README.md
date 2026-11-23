@@ -2,7 +2,7 @@
 
 A quiet, bilingual, data-driven academic homepage for a mathematics undergraduate. Built with Astro, TypeScript, and plain CSS, it produces a fast static site with very little client-side JavaScript. Chinese is the default at `/`; English is available at `/en/` through the header language switch.
 
-All biography, education, interests, awards, experience, and project content in the first version is **placeholder content**. Replace it with verified information before publishing.
+The profile and coursework contain confirmed personal information. Example awards, experiences, and projects are retained in the data files with `hidden: true` and are excluded from the generated site. Replace their contents and remove `hidden: true` to publish a real entry.
 
 ## Local development
 
@@ -36,6 +36,14 @@ Each language has four parallel content files. Update both columns when both ver
 Shared interfaces are in `src/data/types.ts`. Optional properties may be omitted; the page hides the corresponding row or link automatically.
 
 Interface translations such as headings and button labels are centralized in `src/i18n/ui.ts`. Routine biography updates do not require editing page components.
+
+### Empty sections and coursework
+
+- `about: []` and `academicInterests: []` hide their sections and navigation links.
+- `hidden: true` hides an award, experience, or project without deleting the example. An empty visible list hides the entire section.
+- `coursework` lists completed courses; `currentCoursework` lists courses in progress. Edit both language profiles to keep the translations aligned.
+- Omit `cvUrl` when no CV is available; both the download button and CV section remain hidden.
+- Section numbers and navigation are generated from the visible sections.
 
 ### Change About
 
@@ -85,7 +93,7 @@ Add an object to `src/data/awards.ts`, ordered newest first:
 },
 ```
 
-Delete every placeholder award that you do not replace.
+Keep `hidden: true` on placeholder awards until they have been replaced with real information.
 
 ### Add a project
 
@@ -144,12 +152,12 @@ academicInterests: [
 ### Add the CV
 
 1. Put your real PDF at `public/cv.pdf`.
-2. Keep `cvUrl: 'cv.pdf'` in `src/data/profile.ts`.
+2. Add `cvUrl: 'cv.pdf'` to both `src/data/profile.ts` and `src/data/zh/profile.ts`.
 3. Delete `public/cv-README.txt` if desired.
 
 Both Download CV links then work without component changes. To use another filename or an external file, change only `cvUrl` in `src/data/profile.ts`.
 
-The repository intentionally does not include a fabricated CV. Until `public/cv.pdf` is added, the buttons demonstrate the final URL but return 404.
+The repository does not include a CV yet. Leave `cvUrl` omitted until the PDF exists, so the site has no broken CV link.
 
 ### Change contact information
 

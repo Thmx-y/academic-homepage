@@ -4,6 +4,7 @@ import type { Project } from '../types';
 export const projectsZh: Project[] = [
   {
     name: '数学建模项目',
+    hidden: true,
     kind: '数学建模',
     date: '2026',
     description: '一个使用最优化与模拟方法研究建模问题的占位项目。请替换为实际问题、主要方法和最终结果。',
@@ -13,6 +14,7 @@ export const projectsZh: Project[] = [
   },
   {
     name: '交互式数学可视化',
+    hidden: true,
     kind: '数学可视化',
     date: '2025',
     description: '一个使用克制的网页交互方式解释数学概念的占位项目。',
@@ -22,6 +24,7 @@ export const projectsZh: Project[] = [
   },
   {
     name: '个人软件项目',
+    hidden: true,
     kind: '软件项目',
     date: '2025',
     description: '用于展示独立设计与实现的小型应用占位。请简要说明它解决的问题和开发动机。',

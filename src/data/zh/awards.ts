@@ -4,6 +4,7 @@ import type { Award } from '../types';
 export const awardsZh: Award[] = [
   {
     name: '获奖结果占位',
+    hidden: true,
     competition: '全国大学生数学竞赛',
     level: '级别 / 组别',
     date: '2026',
@@ -11,6 +12,7 @@ export const awardsZh: Award[] = [
   },
   {
     name: '数学建模竞赛占位',
+    hidden: true,
     competition: '全国大学生数学建模竞赛',
     level: '团队奖项 / 参赛经历',
     date: '2025',
@@ -18,6 +20,7 @@ export const awardsZh: Award[] = [
   },
   {
     name: '奖学金占位',
+    hidden: true,
     competition: '大学名称',
     date: '2025',
     description: '请替换为正式奖学金名称及评定依据。',

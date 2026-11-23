@@ -4,6 +4,7 @@ import type { Project } from './types';
 export const projects: Project[] = [
   {
     name: 'Mathematical Modeling Project',
+    hidden: true,
     kind: 'Mathematical Modeling',
     date: '2026',
     description:
@@ -14,6 +15,7 @@ export const projects: Project[] = [
   },
   {
     name: 'Interactive Mathematics Visualization',
+    hidden: true,
     kind: 'Mathematical Visualization',
     date: '2025',
     description:
@@ -24,6 +26,7 @@ export const projects: Project[] = [
   },
   {
     name: 'Personal Software Project',
+    hidden: true,
     kind: 'Software',
     date: '2025',
     description:

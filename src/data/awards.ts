@@ -4,6 +4,7 @@ import type { Award } from './types';
 export const awards: Award[] = [
   {
     name: 'Award Result Placeholder',
+    hidden: true,
     competition: 'Chinese Mathematics Competitions',
     level: 'Level / Category',
     date: '2026',
@@ -11,6 +12,7 @@ export const awards: Award[] = [
   },
   {
     name: 'Modeling Competition Placeholder',
+    hidden: true,
     competition: 'Undergraduate Mathematical Contest in Modeling',
     level: 'Team award / participation',
     date: '2025',
@@ -18,6 +20,7 @@ export const awards: Award[] = [
   },
   {
     name: 'Scholarship Placeholder',
+    hidden: true,
     competition: 'University Name',
     date: '2025',
     description: 'Replace this entry with the official scholarship name and basis.',

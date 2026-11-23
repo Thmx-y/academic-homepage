@@ -4,9 +4,10 @@ import type { Profile } from './types';
  * Confirmed profile data. Unprovided fields remain examples or are left empty.
  */
 export const profile: Profile = {
-  name: '唐德军',
-  role: 'Mathematics and Applied Mathematics Undergraduate · Sophomore',
+  name: 'Dejun Tang',
+  role: 'Mathematics and Applied Mathematics Undergraduate · Junior',
   university: 'Anhui University',
+  location: 'Hefei',
   introduction: '',
   about: [],
   email: {
@@ -16,32 +17,37 @@ export const profile: Profile = {
   socialLinks: [
     { label: 'GitHub', url: 'https://github.com/192qq-maker' },
   ],
-  cvUrl: 'cv.pdf',
+  // Add cvUrl: 'cv.pdf' after placing your real CV in public/.
   canonicalUrl: 'https://192qq-maker.github.io/academic-homepage/en/',
   education: [
     {
       university: 'Anhui University',
       degree: 'Undergraduate',
       major: 'Mathematics and Applied Mathematics',
-      startYear: 'Sophomore',
+      startYear: 'September 2024',
       endYear: 'September 2028 (expected)',
+      location: 'Hefei',
+      gpa: '3.98 / 5.00',
+      ranking: '4 / 110',
     },
   ],
-  academicInterests: [
-    'Mathematical Analysis',
-    'Linear Algebra',
-    'Probability Theory',
-    'Mathematical Modeling',
-    'Optimization',
-    'Numerical Methods',
-    'Computational Mathematics',
-  ],
+  academicInterests: [],
   coursework: [
     'Mathematical Analysis',
     'Advanced Algebra',
+    'Analytic Geometry',
     'Probability Theory',
     'Ordinary Differential Equations',
+    'Real Analysis',
+    'Abstract Algebra',
+    'Complex Analysis',
+    'Mathematical Statistics',
+  ],
+  currentCoursework: [
+    'Functional Analysis',
+    'Differential Geometry',
+    'Topology',
     'Numerical Analysis',
-    'Mathematical Modeling',
+    'Analytic Number Theory',
   ],
 };

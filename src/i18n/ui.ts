@@ -18,6 +18,8 @@ export interface UiText {
   };
   interests: string;
   selectedCoursework: string;
+  completedCoursework: string;
+  currentCoursework: string;
   awardsTitle: string;
   experienceTitle: string;
   projectsTitle: string;
@@ -62,6 +64,8 @@ export const ui: Record<SiteLanguage, UiText> = {
     },
     interests: '学术兴趣',
     selectedCoursework: '主要课程',
+    completedCoursework: '已修课程',
+    currentCoursework: '正在修读',
     awardsTitle: '奖项与竞赛',
     experienceTitle: '科研与相关经历',
     projectsTitle: '代表项目',
@@ -104,6 +108,8 @@ export const ui: Record<SiteLanguage, UiText> = {
     },
     interests: 'Academic Interests',
     selectedCoursework: 'Selected Coursework',
+    completedCoursework: 'Completed',
+    currentCoursework: 'In progress',
     awardsTitle: 'Awards & Competitions',
     experienceTitle: 'Research & Experience',
     projectsTitle: 'Selected Projects',

@@ -27,14 +27,16 @@ export interface Profile {
     domain: string;
   };
   socialLinks: SocialLink[];
-  cvUrl: string;
+  cvUrl?: string;
   canonicalUrl: string;
   education: Education[];
   academicInterests: string[];
   coursework: string[];
+  currentCoursework?: string[];
 }
 
 export interface Award {
+  hidden?: boolean;
   name: string;
   competition: string;
   level?: string;
@@ -44,6 +46,7 @@ export interface Award {
 }
 
 export interface Experience {
+  hidden?: boolean;
   title: string;
   organization?: string;
   advisor?: string;
@@ -66,6 +69,7 @@ export type ProjectKind =
   | '软件项目';
 
 export interface Project {
+  hidden?: boolean;
   name: string;
   kind: ProjectKind;
   date: string;

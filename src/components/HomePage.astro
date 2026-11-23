@@ -16,19 +16,29 @@ interface Props {
 }
 
 const { language, profile, awards, experiences, projects, alternateUrls } = Astro.props;
+const visibleAwards = awards.filter((item) => !item.hidden);
+const visibleExperiences = experiences.filter((item) => !item.hidden);
+const visibleProjects = projects.filter((item) => !item.hidden);
+const hasAbout = profile.about.some((paragraph) => paragraph.trim());
+const hasInterests = profile.academicInterests.length > 0;
+const hasCoursework = profile.coursework.length > 0 || Boolean(profile.currentCoursework?.length);
 const t = ui[language];
 const base = import.meta.env.BASE_URL;
 const withBase = (path: string) =>
   /^(https?:|mailto:|#)/.test(path) ? path : `${base}${path.replace(/^\//, '')}`;
 
 const navItems = [
-  [t.nav.about, 'about'],
-  [t.nav.education, 'education'],
-  [t.nav.awards, 'awards'],
-  [t.nav.experience, 'experience'],
-  [t.nav.projects, 'projects'],
-  [t.nav.cv, 'cv'],
-];
+  { label: t.nav.about, id: 'about', visible: hasAbout },
+  { label: t.nav.education, id: 'education', visible: profile.education.length > 0 },
+  { label: t.interests, id: 'interests', visible: hasInterests },
+  { label: t.nav.awards, id: 'awards', visible: visibleAwards.length > 0 },
+  { label: t.nav.experience, id: 'experience', visible: visibleExperiences.length > 0 },
+  { label: t.nav.projects, id: 'projects', visible: visibleProjects.length > 0 },
+  { label: t.nav.coursework, id: 'coursework', visible: hasCoursework },
+  { label: t.nav.cv, id: 'cv', visible: Boolean(profile.cvUrl) },
+  { label: t.nav.contact, id: 'contact', visible: true },
+].filter((item) => item.visible);
+const sectionNumber = (id: string) => String(navItems.filter((item) => item.id !== 'cv').findIndex((item) => item.id === id) + 1).padStart(2, '0');
 
 const projectLinks = (project: Project) => [
   { label: t.github, url: project.githubUrl && withBase(project.githubUrl) },
@@ -42,7 +52,7 @@ const switchLabel = language === 'zh' ? 'EN' : '中';
 
 <BaseLayout
   title={`${profile.name} — ${profile.role}`}
-  description={profile.introduction}
+  description={profile.introduction || `${profile.name} · ${profile.role} · ${profile.university}`}
   canonicalUrl={profile.canonicalUrl}
   lang={t.htmlLang}
   alternateUrls={alternateUrls}
@@ -56,7 +66,7 @@ const switchLabel = language === 'zh' ? 'EN' : '中';
       </a>
       <nav aria-label={t.primaryNavigation}>
         <ul>
-          {navItems.map(([label, id]) => <li><a href={`#${id}`}>{label}</a></li>)}
+          {navItems.map(({ label, id }) => <li><a href={`#${id}`}>{label}</a></li>)}
         </ul>
       </nav>
       <a class="language-switch" href={switchUrl} lang={language === 'zh' ? 'en' : 'zh-CN'} aria-label={t.switchLanguage}>
@@ -88,7 +98,7 @@ const switchLabel = language === 'zh' ? 'EN' : '中';
             {profile.email.user} [at] {profile.email.domain.replace(/\./g, ' [dot] ')}
           </a>
           {profile.socialLinks.map((link) => <a href={link.url} rel="me noreferrer">{link.label}</a>)}
-          <a class="button" href={withBase(profile.cvUrl)} download>{t.downloadCv} <span aria-hidden="true">↓</span></a>
+          {profile.cvUrl && <a class="button" href={withBase(profile.cvUrl)} download>{t.downloadCv} <span aria-hidden="true">↓</span></a>}
         </div>
       </div>
       <div class="math-mark" aria-hidden="true">
@@ -106,20 +116,18 @@ const switchLabel = language === 'zh' ? 'EN' : '中';
       <aside aria-label={t.onThisPage}>
         <p>{t.onThisPage}</p>
         <ul>
-          {navItems.slice(0, 5).map(([label, id]) => <li><a href={`#${id}`}>{label}</a></li>)}
-          <li><a href="#coursework">{t.nav.coursework}</a></li>
-          <li><a href="#contact">{t.nav.contact}</a></li>
+          {navItems.map(({ label, id }) => <li><a href={`#${id}`}>{label}</a></li>)}
         </ul>
       </aside>
 
       <div class="sections">
-        <section id="about" aria-labelledby="about-title">
-          <div class="section-heading"><span>01</span><h2 id="about-title">{t.nav.about}</h2></div>
+        {hasAbout && <section id="about" aria-labelledby="about-title">
+          <div class="section-heading"><span>{sectionNumber('about')}</span><h2 id="about-title">{t.nav.about}</h2></div>
           <div class="prose">{profile.about.map((paragraph) => <p>{paragraph}</p>)}</div>
-        </section>
+        </section>}
 
-        <section id="education" aria-labelledby="education-title">
-          <div class="section-heading"><span>02</span><h2 id="education-title">{t.nav.education}</h2></div>
+        {profile.education.length > 0 && <section id="education" aria-labelledby="education-title">
+          <div class="section-heading"><span>{sectionNumber('education')}</span><h2 id="education-title">{t.nav.education}</h2></div>
           <div class="timeline">
             {profile.education.map((item) => (
               <article class="timeline-item">
@@ -134,17 +142,17 @@ const switchLabel = language === 'zh' ? 'EN' : '中';
               </article>
             ))}
           </div>
-        </section>
+        </section>}
 
-        <section id="interests" aria-labelledby="interests-title">
-          <div class="section-heading"><span>03</span><h2 id="interests-title">{t.interests}</h2></div>
+        {hasInterests && <section id="interests" aria-labelledby="interests-title">
+          <div class="section-heading"><span>{sectionNumber('interests')}</span><h2 id="interests-title">{t.interests}</h2></div>
           <ul class="interest-list">{profile.academicInterests.map((interest) => <li>{interest}</li>)}</ul>
-        </section>
+        </section>}
 
-        <section id="awards" aria-labelledby="awards-title">
-          <div class="section-heading"><span>04</span><h2 id="awards-title">{t.awardsTitle}</h2></div>
+        {visibleAwards.length > 0 && <section id="awards" aria-labelledby="awards-title">
+          <div class="section-heading"><span>{sectionNumber('awards')}</span><h2 id="awards-title">{t.awardsTitle}</h2></div>
           <div class="entries">
-            {awards.map((award) => (
+            {visibleAwards.map((award) => (
               <article class="entry">
                 <time>{award.date}</time>
                 <div>
@@ -155,12 +163,12 @@ const switchLabel = language === 'zh' ? 'EN' : '中';
               </article>
             ))}
           </div>
-        </section>
+        </section>}
 
-        <section id="experience" aria-labelledby="experience-title">
-          <div class="section-heading"><span>05</span><h2 id="experience-title">{t.experienceTitle}</h2></div>
+        {visibleExperiences.length > 0 && <section id="experience" aria-labelledby="experience-title">
+          <div class="section-heading"><span>{sectionNumber('experience')}</span><h2 id="experience-title">{t.experienceTitle}</h2></div>
           <div class="entries">
-            {experiences.map((experience) => (
+            {visibleExperiences.map((experience) => (
               <article class="entry">
                 <time>{experience.date}</time>
                 <div>
@@ -174,12 +182,12 @@ const switchLabel = language === 'zh' ? 'EN' : '中';
               </article>
             ))}
           </div>
-        </section>
+        </section>}
 
-        <section id="projects" aria-labelledby="projects-title">
-          <div class="section-heading"><span>06</span><h2 id="projects-title">{t.projectsTitle}</h2></div>
+        {visibleProjects.length > 0 && <section id="projects" aria-labelledby="projects-title">
+          <div class="section-heading"><span>{sectionNumber('projects')}</span><h2 id="projects-title">{t.projectsTitle}</h2></div>
           <div class="projects">
-            {projects.map((project, index) => (
+            {visibleProjects.map((project, index) => (
               <article class="project">
                 <div class="project-number" aria-hidden="true">{String(index + 1).padStart(2, '0')}</div>
                 <div class="project-body">
@@ -198,24 +206,31 @@ const switchLabel = language === 'zh' ? 'EN' : '中';
               </article>
             ))}
           </div>
-        </section>
+        </section>}
 
-        <section id="coursework" aria-labelledby="coursework-title">
-          <div class="section-heading"><span>07</span><h2 id="coursework-title">{t.selectedCoursework}</h2></div>
-          <ul class="course-list">{profile.coursework.map((course) => <li>{course}</li>)}</ul>
-        </section>
+        {hasCoursework && <section id="coursework" aria-labelledby="coursework-title">
+          <div class="section-heading"><span>{sectionNumber('coursework')}</span><h2 id="coursework-title">{t.selectedCoursework}</h2></div>
+          {profile.coursework.length > 0 && <div class="course-group">
+            <h3>{t.completedCoursework}</h3>
+            <ul class="course-list">{profile.coursework.map((course) => <li>{course}</li>)}</ul>
+          </div>}
+          {Boolean(profile.currentCoursework?.length) && <div class="course-group">
+            <h3>{t.currentCoursework}</h3>
+            <ul class="course-list">{profile.currentCoursework?.map((course) => <li>{course}</li>)}</ul>
+          </div>}
+        </section>}
 
-        <section id="cv" class="cv-section" aria-labelledby="cv-title">
+        {profile.cvUrl && <section id="cv" class="cv-section" aria-labelledby="cv-title">
           <div>
             <p class="eyebrow">{t.cvEyebrow}</p>
             <h2 id="cv-title">{t.cvTitle}</h2>
             <p>{t.cvDescription}</p>
           </div>
           <a class="button button-light" href={withBase(profile.cvUrl)} download>{t.downloadCv} <span aria-hidden="true">↓</span></a>
-        </section>
+        </section>}
 
         <section id="contact" aria-labelledby="contact-title">
-          <div class="section-heading"><span>08</span><h2 id="contact-title">{t.nav.contact}</h2></div>
+          <div class="section-heading"><span>{sectionNumber('contact')}</span><h2 id="contact-title">{t.nav.contact}</h2></div>
           <p class="contact-copy">{t.contactDescription}</p>
           <div class="contact-links">
             <a data-email data-user={profile.email.user} data-domain={profile.email.domain} href="#contact">
