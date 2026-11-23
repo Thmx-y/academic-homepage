@@ -10,7 +10,7 @@ export const projectsZh: Project[] = [
     description: '一个使用最优化与模拟方法研究建模问题的占位项目。请替换为实际问题、主要方法和最终结果。',
     role: '模型建立、程序实现与结果分析',
     topics: ['最优化', '模拟', 'Python'],
-    githubUrl: 'https://github.com/192qq-maker',
+    githubUrl: 'https://github.com/Thmx-y',
   },
   {
     name: '交互式数学可视化',

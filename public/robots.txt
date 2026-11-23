@@ -1,5 +1,4 @@
 User-agent: *
 Allow: /
 
-# Replace with your final deployed URL.
-Sitemap: https://192qq-maker.github.io/academic-homepage/sitemap-index.xml
+Sitemap: https://thmx-y.github.io/academic-homepage/sitemap-index.xml

@@ -13,10 +13,10 @@ export const profileZh: Profile = {
     domain: 'stu.ahu.edu.cn',
   },
   socialLinks: [
-    { label: 'GitHub', url: 'https://github.com/192qq-maker' },
+    { label: 'GitHub', url: 'https://github.com/Thmx-y' },
   ],
   // 将真实简历放入 public/ 后，添加 cvUrl: 'cv.pdf'。
-  canonicalUrl: 'https://192qq-maker.github.io/academic-homepage/',
+  canonicalUrl: 'https://thmx-y.github.io/academic-homepage/',
   education: [
     {
       university: '安徽大学',

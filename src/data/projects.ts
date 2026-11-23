@@ -11,7 +11,7 @@ export const projects: Project[] = [
       'A placeholder computational study exploring optimization and simulation methods for a modeling problem. Replace this with the problem, method, and result.',
     role: 'Model formulation, implementation, and analysis',
     topics: ['Optimization', 'Simulation', 'Python'],
-    githubUrl: 'https://github.com/192qq-maker',
+    githubUrl: 'https://github.com/Thmx-y',
   },
   {
     name: 'Interactive Mathematics Visualization',
