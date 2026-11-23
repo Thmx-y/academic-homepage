@@ -39,6 +39,7 @@ Interface translations such as headings and button labels are centralized in `sr
 
 ### Empty sections and coursework
 
+- Both profiles currently set `showPlaceholders: true`: empty About, interests, projects, and CV sections show localized “to be added” text. Missing experience dates also show this placeholder. Set it to `false` or omit it to restore the empty-section hiding behavior below. Entries marked `hidden: true` remain unpublished examples in either mode.
 - `about: []` and `academicInterests: []` hide their sections and navigation links.
 - `hidden: true` hides an award, experience, or project without deleting the example. An empty visible list hides the entire section.
 - `coursework` lists completed courses; `currentCoursework` lists courses in progress. Edit both language profiles to keep the translations aligned.

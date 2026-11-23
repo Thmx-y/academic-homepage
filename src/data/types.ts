@@ -33,6 +33,7 @@ export interface Profile {
   academicInterests: string[];
   coursework: string[];
   currentCoursework?: string[];
+  showPlaceholders?: boolean;
 }
 
 export interface Award {

@@ -4,6 +4,7 @@ import type { Profile } from './types';
  * Confirmed profile data. Unprovided fields remain examples or are left empty.
  */
 export const profile: Profile = {
+  showPlaceholders: true,
   name: 'Dejun Tang',
   role: 'Mathematics and Applied Mathematics Undergraduate · Junior',
   university: 'Anhui University',

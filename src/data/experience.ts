@@ -3,8 +3,8 @@ import type { Experience } from './types';
 // Project level is confirmed; the project title, dates, and specific work remain to be added.
 export const experiences: Experience[] = [
   {
-    title: 'National Undergraduate Innovation and Entrepreneurship Training Program',
-    description: 'Participation in a national-level project under the Undergraduate Innovation and Entrepreneurship Training Program.',
+    title: 'National Undergraduate Innovation and Entrepreneurship Training Program (project title to be added)',
+    description: 'Participation in a national-level project under the Undergraduate Innovation and Entrepreneurship Training Program. Specific contributions: to be added.',
   },
   {
     title: 'Reading Project Placeholder',

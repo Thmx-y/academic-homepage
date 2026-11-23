@@ -2,6 +2,7 @@ import type { Profile } from '../types';
 
 /** 已确认的个人资料；未提供的内容仍保留示例或留空。 */
 export const profileZh: Profile = {
+  showPlaceholders: true,
   name: '唐德军',
   role: '数学与应用数学专业本科生 · 大三',
   university: '安徽大学',

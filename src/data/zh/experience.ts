@@ -3,8 +3,8 @@ import type { Experience } from '../types';
 // 已确认项目先记录项目级别；名称、时间和具体工作待补充。占位示例继续隐藏。
 export const experiencesZh: Experience[] = [
   {
-    title: '国家级大学生创新创业训练计划项目',
-    description: '参与国家级大学生创新创业训练计划项目。',
+    title: '国家级大学生创新创业训练计划项目（项目名称待补充）',
+    description: '参与国家级大学生创新创业训练计划项目。具体工作：待补充。',
   },
   {
     title: '阅读项目占位',

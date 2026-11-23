@@ -43,6 +43,12 @@ export interface UiText {
   switchTheme: string;
   lightTheme: string;
   darkTheme: string;
+  pending: string;
+  aboutPending: string;
+  interestsPending: string;
+  projectsPending: string;
+  cvPendingTitle: string;
+  cvPendingDescription: string;
 }
 
 export const ui: Record<SiteLanguage, UiText> = {
@@ -89,6 +95,12 @@ export const ui: Record<SiteLanguage, UiText> = {
     switchTheme: '切换配色模式',
     lightTheme: '切换至浅色模式',
     darkTheme: '切换至深色模式',
+    pending: '待补充',
+    aboutPending: '个人简介待补充。',
+    interestsPending: '学术兴趣待补充。',
+    projectsPending: '项目资料待补充。',
+    cvPendingTitle: '简历待补充',
+    cvPendingDescription: '暂未提供简历 PDF。',
   },
   en: {
     htmlLang: 'en',
@@ -133,5 +145,11 @@ export const ui: Record<SiteLanguage, UiText> = {
     switchTheme: 'Switch color mode',
     lightTheme: 'Switch to light mode',
     darkTheme: 'Switch to dark mode',
+    pending: 'To be added',
+    aboutPending: 'Personal introduction to be added.',
+    interestsPending: 'Academic interests to be added.',
+    projectsPending: 'Project details to be added.',
+    cvPendingTitle: 'CV to be added',
+    cvPendingDescription: 'A CV PDF is not yet available.',
   },
 };

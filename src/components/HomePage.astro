@@ -16,6 +16,7 @@ interface Props {
 }
 
 const { language, profile, awards, experiences, projects, alternateUrls } = Astro.props;
+const showPlaceholders = profile.showPlaceholders ?? false;
 const visibleAwards = awards.filter((item) => !item.hidden);
 const visibleExperiences = experiences.filter((item) => !item.hidden);
 const visibleProjects = projects.filter((item) => !item.hidden);
@@ -28,14 +29,14 @@ const withBase = (path: string) =>
   /^(https?:|mailto:|#)/.test(path) ? path : `${base}${path.replace(/^\//, '')}`;
 
 const navItems = [
-  { label: t.nav.about, id: 'about', visible: hasAbout },
+  { label: t.nav.about, id: 'about', visible: hasAbout || showPlaceholders },
   { label: t.nav.education, id: 'education', visible: profile.education.length > 0 },
-  { label: t.interests, id: 'interests', visible: hasInterests },
+  { label: t.interests, id: 'interests', visible: hasInterests || showPlaceholders },
   { label: t.nav.awards, id: 'awards', visible: visibleAwards.length > 0 },
   { label: t.nav.experience, id: 'experience', visible: visibleExperiences.length > 0 },
-  { label: t.nav.projects, id: 'projects', visible: visibleProjects.length > 0 },
+  { label: t.nav.projects, id: 'projects', visible: visibleProjects.length > 0 || showPlaceholders },
   { label: t.nav.coursework, id: 'coursework', visible: hasCoursework },
-  { label: t.nav.cv, id: 'cv', visible: Boolean(profile.cvUrl) },
+  { label: t.nav.cv, id: 'cv', visible: Boolean(profile.cvUrl) || showPlaceholders },
   { label: t.nav.contact, id: 'contact', visible: true },
 ].filter((item) => item.visible);
 const sectionNumber = (id: string) => String(navItems.filter((item) => item.id !== 'cv').findIndex((item) => item.id === id) + 1).padStart(2, '0');
@@ -121,9 +122,9 @@ const switchLabel = language === 'zh' ? 'EN' : '中';
       </aside>
 
       <div class="sections">
-        {hasAbout && <section id="about" aria-labelledby="about-title">
+        {(hasAbout || showPlaceholders) && <section id="about" aria-labelledby="about-title">
           <div class="section-heading"><span>{sectionNumber('about')}</span><h2 id="about-title">{t.nav.about}</h2></div>
-          <div class="prose">{profile.about.map((paragraph) => <p>{paragraph}</p>)}</div>
+          <div class="prose">{hasAbout ? profile.about.map((paragraph) => <p>{paragraph}</p>) : <p class="placeholder-note">{t.aboutPending}</p>}</div>
         </section>}
 
         {profile.education.length > 0 && <section id="education" aria-labelledby="education-title">
@@ -144,9 +145,9 @@ const switchLabel = language === 'zh' ? 'EN' : '中';
           </div>
         </section>}
 
-        {hasInterests && <section id="interests" aria-labelledby="interests-title">
+        {(hasInterests || showPlaceholders) && <section id="interests" aria-labelledby="interests-title">
           <div class="section-heading"><span>{sectionNumber('interests')}</span><h2 id="interests-title">{t.interests}</h2></div>
-          <ul class="interest-list">{profile.academicInterests.map((interest) => <li>{interest}</li>)}</ul>
+          {hasInterests ? <ul class="interest-list">{profile.academicInterests.map((interest) => <li>{interest}</li>)}</ul> : <p class="placeholder-note">{t.interestsPending}</p>}
         </section>}
 
         {visibleAwards.length > 0 && <section id="awards" aria-labelledby="awards-title">
@@ -170,7 +171,7 @@ const switchLabel = language === 'zh' ? 'EN' : '中';
           <div class="entries">
             {visibleExperiences.map((experience) => (
               <article class="entry">
-                <div>{experience.date && <time>{experience.date}</time>}</div>
+                <div>{experience.date ? <time>{experience.date}</time> : showPlaceholders && <span class="timeline-date">{t.pending}</span>}</div>
                 <div>
                   <h3>{experience.url ? <a href={experience.url}>{experience.title}</a> : experience.title}</h3>
                   {(experience.organization || experience.advisor) && (
@@ -184,9 +185,10 @@ const switchLabel = language === 'zh' ? 'EN' : '中';
           </div>
         </section>}
 
-        {visibleProjects.length > 0 && <section id="projects" aria-labelledby="projects-title">
+        {(visibleProjects.length > 0 || showPlaceholders) && <section id="projects" aria-labelledby="projects-title">
           <div class="section-heading"><span>{sectionNumber('projects')}</span><h2 id="projects-title">{t.projectsTitle}</h2></div>
-          <div class="projects">
+          {visibleProjects.length === 0 && <p class="placeholder-note">{t.projectsPending}</p>}
+          {visibleProjects.length > 0 && <div class="projects">
             {visibleProjects.map((project, index) => (
               <article class="project">
                 <div class="project-number" aria-hidden="true">{String(index + 1).padStart(2, '0')}</div>
@@ -205,7 +207,7 @@ const switchLabel = language === 'zh' ? 'EN' : '中';
                 </div>
               </article>
             ))}
-          </div>
+          </div>}
         </section>}
 
         {hasCoursework && <section id="coursework" aria-labelledby="coursework-title">
@@ -220,13 +222,13 @@ const switchLabel = language === 'zh' ? 'EN' : '中';
           </div>}
         </section>}
 
-        {profile.cvUrl && <section id="cv" class="cv-section" aria-labelledby="cv-title">
+        {(profile.cvUrl || showPlaceholders) && <section id="cv" class="cv-section" aria-labelledby="cv-title">
           <div>
             <p class="eyebrow">{t.cvEyebrow}</p>
-            <h2 id="cv-title">{t.cvTitle}</h2>
-            <p>{t.cvDescription}</p>
+            <h2 id="cv-title">{profile.cvUrl ? t.cvTitle : t.cvPendingTitle}</h2>
+            <p>{profile.cvUrl ? t.cvDescription : t.cvPendingDescription}</p>
           </div>
-          <a class="button button-light" href={withBase(profile.cvUrl)} download>{t.downloadCv} <span aria-hidden="true">↓</span></a>
+          {profile.cvUrl && <a class="button button-light" href={withBase(profile.cvUrl)} download>{t.downloadCv} <span aria-hidden="true">↓</span></a>}
         </section>}
 
         <section id="contact" aria-labelledby="contact-title">
