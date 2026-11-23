@@ -50,7 +50,7 @@ export interface Experience {
   title: string;
   organization?: string;
   advisor?: string;
-  date: string;
+  date?: string;
   description: string;
   topics?: string[];
   url?: string;

@@ -1,7 +1,19 @@
 import type { Award } from './types';
 
-// Placeholder entries only. Replace or remove them before publishing.
+// Real awards are ordered newest first. Retained examples use hidden: true.
 export const awards: Award[] = [
+  {
+    name: 'National Second Prize',
+    competition: '2026 China Undergraduate Mathematical Contest in Modeling (CUMCM)',
+    level: 'National',
+    date: '2026',
+  },
+  {
+    name: 'Provincial Third Prize',
+    competition: '17th Chinese Mathematics Competitions (CMC), Mathematics Category A',
+    level: 'Provincial',
+    date: '2025',
+  },
   {
     name: 'Award Result Placeholder',
     hidden: true,

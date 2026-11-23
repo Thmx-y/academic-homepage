@@ -1,7 +1,11 @@
 import type { Experience } from './types';
 
-// Placeholder entries only. They are examples of supported formats.
+// Project level is confirmed; the project title, dates, and specific work remain to be added.
 export const experiences: Experience[] = [
+  {
+    title: 'National Undergraduate Innovation and Entrepreneurship Training Program',
+    description: 'Participation in a national-level project under the Undergraduate Innovation and Entrepreneurship Training Program.',
+  },
   {
     title: 'Reading Project Placeholder',
     hidden: true,

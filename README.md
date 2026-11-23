@@ -2,7 +2,7 @@
 
 A quiet, bilingual, data-driven academic homepage for a mathematics undergraduate. Built with Astro, TypeScript, and plain CSS, it produces a fast static site with very little client-side JavaScript. Chinese is the default at `/`; English is available at `/en/` through the header language switch.
 
-The profile and coursework contain confirmed personal information. Example awards, experiences, and projects are retained in the data files with `hidden: true` and are excluded from the generated site. Replace their contents and remove `hidden: true` to publish a real entry.
+The profile, coursework, and visible awards and experiences contain confirmed personal information. Retained examples use `hidden: true` and are excluded from the generated site. Replace their contents and remove `hidden: true` to publish a real entry. Experience dates may be omitted when not yet supplied.
 
 ## Local development
 

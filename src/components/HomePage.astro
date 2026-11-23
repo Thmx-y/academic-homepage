@@ -170,7 +170,7 @@ const switchLabel = language === 'zh' ? 'EN' : '中';
           <div class="entries">
             {visibleExperiences.map((experience) => (
               <article class="entry">
-                <time>{experience.date}</time>
+                <div>{experience.date && <time>{experience.date}</time>}</div>
                 <div>
                   <h3>{experience.url ? <a href={experience.url}>{experience.title}</a> : experience.title}</h3>
                   {(experience.organization || experience.advisor) && (

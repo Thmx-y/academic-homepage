@@ -1,7 +1,19 @@
 import type { Award } from '../types';
 
-// 以下均为格式示例，并非真实获奖经历。
+// 真实奖项按年份倒序排列；保留的占位示例使用 hidden: true 隐藏。
 export const awardsZh: Award[] = [
+  {
+    name: '全国二等奖',
+    competition: '2026 年高教社杯全国大学生数学建模竞赛',
+    level: '国家级',
+    date: '2026',
+  },
+  {
+    name: '省级三等奖',
+    competition: '第十七届全国大学生数学竞赛（数学 A 类）',
+    level: '省级',
+    date: '2025',
+  },
   {
     name: '获奖结果占位',
     hidden: true,
