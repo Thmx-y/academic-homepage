@@ -79,7 +79,7 @@ const switchLabel = language === 'zh' ? 'EN' : '中';
           {headerNavItems.map(({ label, id }) => <li><a href={`#${id}`}>{label}</a></li>)}
         </ul>
       </nav>
-      <a class="language-switch" href={switchUrl} lang={language === 'zh' ? 'en' : 'zh-CN'} aria-label={t.switchLanguage}>
+      <a class="language-switch" href={switchUrl} target="_blank" rel="noopener noreferrer" lang={language === 'zh' ? 'en' : 'zh-CN'} aria-label={t.switchLanguage}>
         {switchLabel}
       </a>
       <button
@@ -107,8 +107,8 @@ const switchLabel = language === 'zh' ? 'EN' : '中';
           <a data-email data-user={profile.email.user} data-domain={profile.email.domain} href="#contact">
             {profile.email.user} [at] {profile.email.domain.replace(/\./g, ' [dot] ')}
           </a>
-          {profile.socialLinks.map((link) => <a href={link.url} rel="me noreferrer">{link.label}</a>)}
-          {profile.cvUrl && <a class="button" href={withBase(profile.cvUrl)} download>{t.downloadCv} <span aria-hidden="true">↓</span></a>}
+          {profile.socialLinks.map((link) => <a href={link.url} target="_blank" rel="me noopener noreferrer">{link.label}</a>)}
+          {profile.cvUrl && <a class="button" href={withBase(profile.cvUrl)} target="_blank" rel="noopener noreferrer" download>{t.downloadCv} <span aria-hidden="true">↓</span></a>}
         </div>
       </div>
       <div class="math-mark" aria-hidden="true">
@@ -166,7 +166,7 @@ const switchLabel = language === 'zh' ? 'EN' : '中';
               <article class="entry">
                 <time>{award.date}</time>
                 <div>
-                  <h3>{award.url ? <a href={award.url}>{award.name}</a> : award.name}</h3>
+                  <h3>{award.url ? <a href={award.url} target="_blank" rel="noopener noreferrer">{award.name}</a> : award.name}</h3>
                   <p class="item-subtitle">{award.competition}{award.level && ` · ${award.level}`}</p>
                   {award.description && <p>{award.description}</p>}
                 </div>
@@ -182,7 +182,7 @@ const switchLabel = language === 'zh' ? 'EN' : '中';
               <article class="entry">
                 <div>{experience.date ? <time>{experience.date}</time> : showPlaceholders && <span class="timeline-date">{t.pending}</span>}</div>
                 <div>
-                  <h3>{experience.url ? <a href={experience.url}>{experience.title}</a> : experience.title}</h3>
+                  <h3>{experience.url ? <a href={experience.url} target="_blank" rel="noopener noreferrer">{experience.title}</a> : experience.title}</h3>
                   {(experience.organization || experience.advisor) && (
                     <p class="item-subtitle">{[experience.organization, experience.advisor && `${t.advisor}: ${experience.advisor}`].filter(Boolean).join(' · ')}</p>
                   )}
@@ -210,7 +210,7 @@ const switchLabel = language === 'zh' ? 'EN' : '中';
                   {project.topics && <p class="topics"><span>{t.methods}</span> {project.topics.join(' · ')}</p>}
                   {projectLinks(project).length > 0 && (
                     <div class="project-links">
-                      {projectLinks(project).map((link) => <a href={link.url}>{link.label} <span aria-hidden="true">↗</span></a>)}
+                      {projectLinks(project).map((link) => <a href={link.url} target="_blank" rel="noopener noreferrer">{link.label} <span aria-hidden="true">↗</span></a>)}
                     </div>
                   )}
                 </div>
@@ -233,7 +233,7 @@ const switchLabel = language === 'zh' ? 'EN' : '中';
 
         {resourceGroups.length > 0 && <section id="resources" class:list={{ 'resources-compact': visibleResources.every((item) => /^https?:/i.test(item.url ?? '')) }} aria-labelledby="resources-title">
           <div class="section-heading"><span>{sectionNumber('resources')}</span><h2 id="resources-title">{t.nav.resources}</h2></div>
-          <p class="resource-intro">{t.resourcesDescription} <a href={resourceRepositoryUrl}>{t.resourceRepository}</a></p>
+          <p class="resource-intro">{t.resourcesDescription} <a href={resourceRepositoryUrl} target="_blank" rel="noopener noreferrer">{t.resourceRepository}</a></p>
           {resourceGroups.map(({ category, items }) => (
             <div class="resource-group">
               <h3>{t.resourcesCategories[category]}</h3>
@@ -241,13 +241,13 @@ const switchLabel = language === 'zh' ? 'EN' : '中';
                 <ul class="resource-list">
                   {items.map((resource) => (
                     <li>
-                      <h4>{resource.url ? <a href={withBase(resource.url)}>{resource.title[language]}</a> : resource.title[language]}</h4>
+                      <h4>{resource.url ? <a href={withBase(resource.url)} target="_blank" rel="noopener noreferrer">{resource.title[language]}</a> : resource.title[language]}</h4>
                       {(resource.subject || resource.year || resource.format) && <p class="meta">{[resource.subject?.[language], resource.year, resource.format].filter(Boolean).join(' · ')}</p>}
                       {resource.description && <p class="resource-description">{resource.description[language]}</p>}
                       {resource.url ? (!/^https?:/i.test(resource.url) && (
                         <div class="project-links">
-                          <a href={withBase(resource.url)}>{t.viewResource}</a>
-                          <a href={withBase(resource.url)} download>{t.downloadResource}</a>
+                          <a href={withBase(resource.url)} target="_blank" rel="noopener noreferrer">{t.viewResource}</a>
+                          <a href={withBase(resource.url)} target="_blank" rel="noopener noreferrer" download>{t.downloadResource}</a>
                         </div>
                       )) : <p class="meta">{t.resourcePending}</p>}
                     </li>
@@ -264,7 +264,7 @@ const switchLabel = language === 'zh' ? 'EN' : '中';
             <h2 id="cv-title">{profile.cvUrl ? t.cvTitle : t.cvPendingTitle}</h2>
             <p>{profile.cvUrl ? t.cvDescription : t.cvPendingDescription}</p>
           </div>
-          {profile.cvUrl && <a class="button button-light" href={withBase(profile.cvUrl)} download>{t.downloadCv} <span aria-hidden="true">↓</span></a>}
+          {profile.cvUrl && <a class="button button-light" href={withBase(profile.cvUrl)} target="_blank" rel="noopener noreferrer" download>{t.downloadCv} <span aria-hidden="true">↓</span></a>}
         </section>}
 
         <section id="contact" aria-labelledby="contact-title">
@@ -274,7 +274,7 @@ const switchLabel = language === 'zh' ? 'EN' : '中';
             <a data-email data-user={profile.email.user} data-domain={profile.email.domain} href="#contact">
               {profile.email.user} [at] {profile.email.domain.replace(/\./g, ' [dot] ')}
             </a>
-            {profile.socialLinks.map((link) => <a href={link.url} rel="me noreferrer">{link.label} <span aria-hidden="true">↗</span></a>)}
+            {profile.socialLinks.map((link) => <a href={link.url} target="_blank" rel="me noopener noreferrer">{link.label} <span aria-hidden="true">↗</span></a>)}
           </div>
         </section>
       </div>
