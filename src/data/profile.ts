@@ -32,7 +32,6 @@ export const profile: Profile = {
       ranking: '4 / 110',
     },
   ],
-  academicInterests: [],
   coursework: [
     'Mathematical Analysis',
     'Advanced Algebra',

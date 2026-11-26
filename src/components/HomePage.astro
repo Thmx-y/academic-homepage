@@ -22,7 +22,6 @@ const visibleAwards = awards.filter((item) => !item.hidden);
 const visibleExperiences = experiences.filter((item) => !item.hidden);
 const visibleProjects = projects.filter((item) => !item.hidden);
 const hasAbout = profile.about.some((paragraph) => paragraph.trim());
-const hasInterests = profile.academicInterests.length > 0;
 const hasCoursework = profile.coursework.length > 0 || Boolean(profile.currentCoursework?.length);
 const visibleResources = resources.filter((item) => !item.hidden);
 const resourceCategories: ResourceCategory[] = ['past-exams', 'notes', 'other'];
@@ -38,7 +37,6 @@ const withBase = (path: string) =>
 const navItems = [
   { label: t.nav.about, id: 'about', visible: hasAbout || showPlaceholders },
   { label: t.nav.education, id: 'education', visible: profile.education.length > 0 },
-  { label: t.interests, id: 'interests', visible: hasInterests || showPlaceholders },
   { label: t.nav.awards, id: 'awards', visible: visibleAwards.length > 0 },
   { label: t.nav.experience, id: 'experience', visible: visibleExperiences.length > 0 },
   { label: t.nav.projects, id: 'projects', visible: visibleProjects.length > 0 || showPlaceholders },
@@ -152,11 +150,6 @@ const switchLabel = language === 'zh' ? 'EN' : '中';
               </article>
             ))}
           </div>
-        </section>}
-
-        {(hasInterests || showPlaceholders) && <section id="interests" class:list={{ 'section-pending': !hasInterests }} aria-labelledby="interests-title">
-          <div class="section-heading"><span>{sectionNumber('interests')}</span><h2 id="interests-title">{t.interests}</h2></div>
-          {hasInterests ? <ul class="interest-list">{profile.academicInterests.map((interest) => <li>{interest}</li>)}</ul> : <p class="placeholder-note">{t.interestsPending}</p>}
         </section>}
 
         {visibleAwards.length > 0 && <section id="awards" aria-labelledby="awards-title">

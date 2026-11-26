@@ -30,7 +30,6 @@ export const profileZh: Profile = {
       ranking: '4 / 110',
     },
   ],
-  academicInterests: [],
   coursework: [
     '数学分析',
     '高等代数',

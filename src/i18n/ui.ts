@@ -17,7 +17,6 @@ export interface UiText {
     resources: string;
     contact: string;
   };
-  interests: string;
   selectedCoursework: string;
   completedCoursework: string;
   currentCoursework: string;
@@ -46,7 +45,6 @@ export interface UiText {
   darkTheme: string;
   pending: string;
   aboutPending: string;
-  interestsPending: string;
   projectsPending: string;
   cvPendingTitle: string;
   cvPendingDescription: string;
@@ -81,7 +79,6 @@ export const ui: Record<SiteLanguage, UiText> = {
       resources: '学习资料',
       contact: '联系我',
     },
-    interests: '学术兴趣',
     selectedCoursework: '主要课程',
     completedCoursework: '已修课程',
     currentCoursework: '正在修读',
@@ -110,7 +107,6 @@ export const ui: Record<SiteLanguage, UiText> = {
     darkTheme: '切换至深色模式',
     pending: '待补充',
     aboutPending: '个人简介待补充。',
-    interestsPending: '学术兴趣待补充。',
     projectsPending: '项目资料待补充。',
     cvPendingTitle: '简历待补充',
     cvPendingDescription: '暂未提供简历 PDF。',
@@ -143,7 +139,6 @@ export const ui: Record<SiteLanguage, UiText> = {
       resources: 'Resources',
       contact: 'Contact',
     },
-    interests: 'Academic Interests',
     selectedCoursework: 'Selected Coursework',
     completedCoursework: 'Completed',
     currentCoursework: 'In progress',
@@ -172,7 +167,6 @@ export const ui: Record<SiteLanguage, UiText> = {
     darkTheme: 'Switch to dark mode',
     pending: 'To be added',
     aboutPending: 'Personal introduction to be added.',
-    interestsPending: 'Academic interests to be added.',
     projectsPending: 'Project details to be added.',
     cvPendingTitle: 'CV to be added',
     cvPendingDescription: 'A CV PDF is not yet available.',

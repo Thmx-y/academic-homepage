@@ -609,34 +609,6 @@ h3 {
   text-transform: uppercase;
 }
 
-.interest-list {
-  display: grid;
-  margin: 0;
-  padding: 0;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  column-gap: 3rem;
-  list-style: none;
-}
-
-.interest-list li {
-  position: relative;
-  padding: 0.75rem 0 0.75rem 1.25rem;
-  border-bottom: 1px solid var(--line);
-  font-family: var(--serif);
-  font-size: 1.03rem;
-}
-
-.interest-list li::before {
-  position: absolute;
-  top: 1.05rem;
-  left: 0;
-  width: 5px;
-  height: 5px;
-  border: 1px solid var(--accent);
-  border-radius: 50%;
-  content: '';
-}
-
 .projects {
   border-top: 1px solid var(--line);
 }
@@ -1039,7 +1011,6 @@ footer {
     font-size: 0.78rem;
   }
 
-  .interest-list,
   .course-list {
     grid-template-columns: 1fr;
   }

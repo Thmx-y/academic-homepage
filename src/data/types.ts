@@ -30,7 +30,6 @@ export interface Profile {
   cvUrl?: string;
   canonicalUrl: string;
   education: Education[];
-  academicInterests: string[];
   coursework: string[];
   currentCoursework?: string[];
   showPlaceholders?: boolean;
