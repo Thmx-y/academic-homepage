@@ -15,9 +15,7 @@ export const profile: Profile = {
     user: 'a124300084',
     domain: 'stu.ahu.edu.cn',
   },
-  socialLinks: [
-    { label: 'GitHub', url: 'https://github.com/Thmx-y' },
-  ],
+  socialLinks: [],
   cvUrl: '唐德军_升学简历.pdf',
   canonicalUrl: 'https://thmx-y.github.io/academic-homepage/en/',
   education: [
