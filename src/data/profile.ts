@@ -18,7 +18,7 @@ export const profile: Profile = {
   socialLinks: [
     { label: 'GitHub', url: 'https://github.com/Thmx-y' },
   ],
-  // Add cvUrl: 'cv.pdf' after placing your real CV in public/.
+  cvUrl: '唐德军_升学简历.pdf',
   canonicalUrl: 'https://thmx-y.github.io/academic-homepage/en/',
   education: [
     {

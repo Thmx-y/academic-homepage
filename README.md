@@ -4,6 +4,8 @@
 
 网站默认中文，支持切换英文，使用 Astro、TypeScript 和原生 CSS 构建，通过 GitHub Pages 自动部署。
 
+主页提供中文简历下载；文件位于 `public/唐德军_升学简历.pdf`，中英文页面共用，替换同名 PDF 即可更新。
+
 访问地址：[中文主页](https://thmx-y.github.io/academic-homepage/) · [英文主页](https://thmx-y.github.io/academic-homepage/en/)
 
 ## 主要目录
