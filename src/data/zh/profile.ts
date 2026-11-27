@@ -27,7 +27,7 @@ export const profileZh: Profile = {
       endYear: '2028年9月（预计）',
       location: '合肥',
       gpa: '3.98 / 5.00',
-      ranking: '4 / 110',
+      ranking: '3 / 110',
     },
   ],
   coursework: [

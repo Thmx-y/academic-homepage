@@ -29,7 +29,7 @@ export const profile: Profile = {
       endYear: 'September 2028 (expected)',
       location: 'Hefei',
       gpa: '3.98 / 5.00',
-      ranking: '4 / 110',
+      ranking: '3 / 110',
     },
   ],
   coursework: [
