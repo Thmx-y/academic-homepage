@@ -1,10 +1,14 @@
 import type { Experience } from '../types';
 
-// 已确认项目先记录项目级别；名称、时间和具体工作待补充。占位示例继续隐藏。
+// 按已确认的项目资料维护；未使用的占位示例继续隐藏。
 export const experiencesZh: Experience[] = [
   {
-    title: '国家级大学生创新创业训练计划项目（项目名称待补充）',
-    description: '参与国家级大学生创新创业训练计划项目。具体工作：待补充。',
+    title: '基于 PROMETHEE II 技术的组合预测模型及其应用',
+    organization: '安徽大学 · 国家级大学生创新训练计划项目（在研）',
+    advisor: '周礼刚、周元元',
+    date: '2025.11 — 至今',
+    description: '围绕冠心病风险预测，基于 Framingham 数据集比较逻辑回归、支持向量机、随机森林与 CatBoost 模型，通过 PROMETHEE II 多准则评价和 Softmax 赋权构建组合预测模型，并与单项模型及简单加权平均组合模型进行对比。担任项目负责人，负责数学建模、论文撰写和团队统筹，协调任务分工与研究进度。',
+    topics: ['组合预测', '多准则决策', '机器学习'],
   },
   {
     title: '阅读项目占位',

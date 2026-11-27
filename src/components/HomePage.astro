@@ -257,7 +257,7 @@ const switchLabel = language === 'zh' ? 'EN' : '中';
             <h2 id="cv-title">{profile.cvUrl ? t.cvTitle : t.cvPendingTitle}</h2>
             <p>{profile.cvUrl ? t.cvDescription : t.cvPendingDescription}</p>
           </div>
-          {profile.cvUrl && <a class="button button-light" href={withBase(profile.cvUrl)} target="_blank" rel="noopener noreferrer" download>{t.downloadCv} <span aria-hidden="true">↓</span></a>}
+          {profile.cvUrl && <a class="button" href={withBase(profile.cvUrl)} target="_blank" rel="noopener noreferrer" download>{t.downloadCv} <span aria-hidden="true">↓</span></a>}
         </section>}
 
         <section id="contact" aria-labelledby="contact-title">
