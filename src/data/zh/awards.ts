@@ -9,6 +9,11 @@ export const awardsZh: Award[] = [
     date: '2026',
   },
   {
+    name: '优秀个人',
+    competition: '暑期社会实践',
+    date: '2026',
+  },
+  {
     name: '国家励志奖学金',
     competition: '奖学金',
     level: '国家级',

@@ -9,6 +9,11 @@ export const awards: Award[] = [
     date: '2026',
   },
   {
+    name: 'Outstanding Individual',
+    competition: 'Summer Social Practice',
+    date: '2026',
+  },
+  {
     name: 'National Encouragement Scholarship',
     competition: 'Scholarship',
     level: 'National',
